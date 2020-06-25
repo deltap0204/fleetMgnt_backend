@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "automotive.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "image-downloader": "^3.5.0",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.2",
+    "stjs": "0.0.5"
+  }
+}
