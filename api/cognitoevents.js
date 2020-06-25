@@ -1,5 +1,5 @@
 const aws = require("aws-sdk");
-var ses = new aws.SES({region: 'us-east-1'});
+var ses = new aws.SES({region: 'eu-central-1'});
 
 
 module.exports.handler = async (event,context,callback) => {

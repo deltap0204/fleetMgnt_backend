@@ -10,7 +10,7 @@ const AWS = require('aws-sdk');
 const axios = require('axios');
 const fs = require('fs');
 var s3 = new AWS.S3();
-var ses = new AWS.SES({region: 'us-east-1'});
+var ses = new AWS.SES({region: 'eu-central-1'});
 
 
 

@@ -3,7 +3,7 @@ const jira = require("./jira");
 
 
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({
-  region: "us-east-1"
+  region: "eu-central-1"
 });
 
 module.exports.createuser = async event => {
@@ -101,7 +101,7 @@ async function createTheUser(who, inputFilter) {
 
 async function createUser(_email, _tmpPwd, _customer, _isAdmin,name) {
   var params = {
-    UserPoolId: "us-east-1_5TQpFMYfs",
+    UserPoolId: "eu-central-1_pmGKpQaPC",
     Username: _email,
     DesiredDeliveryMediums: ["EMAIL"],
     MessageAction: "SUPPRESS",
@@ -143,7 +143,7 @@ async function createUser(_email, _tmpPwd, _customer, _isAdmin,name) {
 async function setPwd(_email, _pwd) {
   var params = {
     Password: _pwd /* required */,
-    UserPoolId: "us-east-1_5TQpFMYfs" /* required */,
+    UserPoolId: "eu-central-1_pmGKpQaPC" /* required */,
     Username: _email /* required */,
     Permanent: true
   };
@@ -166,7 +166,7 @@ async function setPwd(_email, _pwd) {
 async function deleteUser(body) {
   
   var params = {
-    UserPoolId: 'us-east-1_5TQpFMYfs', /* required */
+    UserPoolId: 'eu-central-1_pmGKpQaPC', /* required */
     Username: body.email /* required */
   };
   console.log(params);
@@ -200,7 +200,7 @@ async function editCustomer(request) {
         Value: request.isAdmin
       }
     ],
-    UserPoolId: 'us-east-1_5TQpFMYfs', /* required */
+    UserPoolId: 'eu-central-1_pmGKpQaPC', /* required */
     Username: request.Username /* required */
   };
   return new Promise(function (resolve, reject) {
@@ -219,7 +219,7 @@ async function editCustomer(request) {
 
 async function listUsers() {
   var params = {
-    UserPoolId: 'us-east-1_5TQpFMYfs'//, /* required */
+    UserPoolId: 'eu-central-1_pmGKpQaPC'//, /* required */
   };
   return new Promise(function (resolve, reject) {
     cognitoidentityserviceprovider.listUsers(params, function (err, data) {
