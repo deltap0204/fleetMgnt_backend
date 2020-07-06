@@ -101,6 +101,7 @@ async function getDetails(key) {
                     "customer": "{{this.fields.customfield_10056}}",
                     "resolutiondate": "{{this.fields.resolutiondate}}",
                     "licencePlate":"{{this.fields.customfield_10059}}",
+                    "chassis":"{{this.fields.customfield_10058}}",
                     "instructions": {
                         "{{#each this.fields.customfield_10080}}": {
                             "id": "{{id}}",
