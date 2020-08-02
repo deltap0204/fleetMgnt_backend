@@ -447,6 +447,30 @@ async function filter(who, cutomFilter) {
     if (cutomFilter.resolutionDateEnd) {
         myQuery += ' and resolutiondate <= \'' + cutomFilter.resolutionDateEnd + '\'';
     }
+    if (cutomFilter.chassyNumber) {
+        myQuery += ' and cf[10058] = \'' + cutomFilter.chassyNumber + '\'';
+    }
+
+    if (cutomFilter.field1) {
+        myQuery += ' and cf[10178] = \'' + cutomFilter.field1 + '\'';
+    }
+
+    if (cutomFilter.field2) {
+        myQuery += ' and cf[10179] = \'' + cutomFilter.field2 + '\'';
+    }
+
+    if (cutomFilter.field3) {
+        myQuery += ' and cf[10180] = \'' + cutomFilter.field3 + '\'';
+    }
+
+    if (cutomFilter.field4) {
+        myQuery += ' and cf[10181] = \'' + cutomFilter.field4 + '\'';
+    }
+
+    if (cutomFilter.field5) {
+        myQuery += ' and cf[10182] = \'' + cutomFilter.field5 + '\'';
+    }
+   
 
 
     // 'Job type'
@@ -475,7 +499,7 @@ async function filter(who, cutomFilter) {
             startAt: startAt,
             maxResults: 50,
             //         fields: [ 'summary' , 'status', 'customfield_10011','customfield_10012'],
-            fields: ['summary', 'attachment', 'status', 'resolutiondate', 'customfield_10079', 'customfield_10060', 'customfield_10061', 'customfield_10062', 'customfield_10063', 'customfield_10065', 'customfield_10056', 'customfield_10057','customfield_10059'],
+            fields: ['summary', 'attachment', 'status', 'resolutiondate', 'customfield_10079', 'customfield_10060', 'customfield_10061', 'customfield_10062', 'customfield_10063', 'customfield_10065', 'customfield_10056', 'customfield_10057','customfield_10059','customfield_10175','customfield_10178','customfield_10179','customfield_10180','customfield_10181','customfield_10182','customfield_10058'],
             fieldsByKeys: false
         },
         json: true
@@ -508,7 +532,14 @@ async function filter(who, cutomFilter) {
                             "customerReference": "{{this.fields.customfield_10057}}",
                             "licencePlate": "{{this.fields.customfield_10059}}",
                             "resolutiondate": "{{this.fields.resolutiondate}}",
-                            "attachments": "{{this.fields.attachment}}"
+                            "attachments": "{{this.fields.attachment}}",
+                            "salesorder":"{{this.fields.customfield_10175}}",
+                            "crf1":"{{this.fields.customfield_10178}}",
+                            "crf2":"{{this.fields.customfield_10179}}",
+                            "crf3":"{{this.fields.customfield_10180}}",
+                            "crf4":"{{this.fields.customfield_10181}}",
+                            "crf5":"{{this.fields.customfield_10182}}",
+                            "platenumber":"{{this.fields.customfield_10058}}"
                         }
                        
                     }
