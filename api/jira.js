@@ -57,7 +57,51 @@ module.exports.getImageThumbnail = getImageThumbnail;
 module.exports.getImages = getImages;
 module.exports.downloadFVDImage = downloadFVDImage;
 module.exports.downloadFVDImage2 = downloadFVDImage2;
+module.exports.addLocation = addLocation;
 
+
+async function addLocation(event){
+    var inputFilter = JSON.parse(event.body);
+    var theComment = {
+        "transition": {
+            "id": inputFilter.id,
+            "customfield_10132":`${inputFilter.lat},${inputFilter.long}`
+          }
+    };
+
+
+    console.log(theComment);
+
+    var options = {
+        method: 'POST',
+        url: 'https://otm-zenith.atlassian.net/rest/api/3/issue/' + inputFilter.key + '/transitions',
+        headers:
+        {
+            Authorization: 'Basic ZnJhbmsudmFuZGFtbWVAb3RtZ3JvdXAuYmU6TUxDaW83Z0Q1bTk3NkxtbXRUSllCNDE1',
+            //Authorization: 'Basic ZnJhbmtAb3RtLmJlOkJrUGs2ZWYxYm84SFdBZ2JVOUQ3QTkyQg==',
+            'Content-Type': 'application/json'
+        },
+        body: theComment,
+        json: true
+    };
+
+    return new Promise(function (resolve, reject) {
+
+
+        request(options, function (error, res, body) {
+            //console.log(res.statusCode);
+            if (!error && res.statusCode == 201) {
+               
+
+                resolve(body);
+
+            } else {
+                reject(body + error);
+            }
+        });
+    });
+
+}
 
 async function getDetails(key) {
 
@@ -102,6 +146,16 @@ async function getDetails(key) {
                     "resolutiondate": "{{this.fields.resolutiondate}}",
                     "licencePlate":"{{this.fields.customfield_10059}}",
                     "chassis":"{{this.fields.customfield_10058}}",
+                    "vehicle_version":"{{this.fields.customfield_10064}}",
+                    "field_1":"{{this.fields.customfield_10178}}",
+                    "field_2":"{{this.fields.customfield_10179}}",
+                    "field_3":"{{this.fields.customfield_10180}}",
+                    "field_4":"{{this.fields.customfield_10182}}",
+                    "field_5":"{{this.fields.customfield_10183}}",
+                    "due_date":"{{this.fields.duedate}}",
+                    "location1":"{{this.fields.customfield_10101}}",
+                    "salesorder":"{{this.fields.customfield_10175}}",
+
                     "instructions": {
                         "{{#each this.fields.customfield_10080}}": {
                             "id": "{{id}}",
@@ -129,7 +183,8 @@ async function getDetails(key) {
                             "content": "{{content}}",
                             "thumbnail":"{{thumbnail}}"
                         }
-                    }
+                    },
+                    "locationCoordinates":"{{this.fields.customfield_10101}}",
                 };
 
 
@@ -497,7 +552,7 @@ async function filter(who, cutomFilter) {
         { //jql: 'project = WT2 and type = Epic and summary ~ "700 voertuigen"',
             jql: myQuery,
             startAt: startAt,
-            maxResults: 50,
+            maxResults: 25,
             //         fields: [ 'summary' , 'status', 'customfield_10011','customfield_10012'],
             fields: ['summary', 'attachment', 'status', 'resolutiondate', 'customfield_10079', 'customfield_10060', 'customfield_10061', 'customfield_10062', 'customfield_10063', 'customfield_10065', 'customfield_10056', 'customfield_10057','customfield_10059','customfield_10175','customfield_10178','customfield_10179','customfield_10180','customfield_10181','customfield_10182','customfield_10058'],
             fieldsByKeys: false

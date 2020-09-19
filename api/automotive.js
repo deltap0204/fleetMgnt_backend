@@ -62,6 +62,10 @@ module.exports.createuser = async event => {
       case '/create/comment':
           res = await jira.addcomment(event);
           break;
+      case '/create/location':
+        res = await jira.addLocation(event);
+        console.log(JSON.stringify(res))
+        break;
     }
 
     
@@ -75,6 +79,7 @@ module.exports.createuser = async event => {
       body: JSON.stringify(res)
     };
   } catch (err) {
+    console.log(err)
     return {
       statusCode: 500,
       headers: {
