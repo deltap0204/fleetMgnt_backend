@@ -30,10 +30,7 @@ module.exports.createuser = async event => {
         console.log("->" + event.pathParameters.key);
         res = await jira.getDetails(event.pathParameters.key);
         break;
-        case '/updateticket/{key}':
-          console.log("->" + event.pathParameters.key);
-          res = await jira.updateTicket(event);
-          break;
+        
       case '/issue/getImage/{id}/{image}':
         var {id,image} = event.pathParameters;
         res = await jira.getImage(id,image);

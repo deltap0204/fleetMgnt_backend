@@ -62,60 +62,22 @@ module.exports.updateTicket = updateTicket;
 
 
 
-async function updateTicket(event){
-    var inputFilter = JSON.parse(event.body);
-    var options = {
-        method: 'POST',
-        url: 'https://otm-zenith.atlassian.net/rest/api/3/issue/' + event.pathParameters.key,
-        headers:
-        {
-            Authorization: 'Basic ZnJhbmsudmFuZGFtbWVAb3RtZ3JvdXAuYmU6TUxDaW83Z0Q1bTk3NkxtbXRUSllCNDE1',
-            //Authorization: 'Basic ZnJhbmtAb3RtLmJlOkJrUGs2ZWYxYm84SFdBZ2JVOUQ3QTkyQg==',
-            'Content-Type': 'application/json'
-        },
-        body: inputFilter,
-        json: true
-    };
-
-    return new Promise(function (resolve, reject) {
-
-
-        request(options, function (error, res, body) {
-            //console.log(res.statusCode);
-            if (!error && res.statusCode == 201) {
-               
-
-                resolve(body);
-
-            } else {
-                reject(body + error);
-            }
-        });
-    });
-
-}
 async function addLocation(event){
     var inputFilter = JSON.parse(event.body);
-    var theComment = {
-        "transition": {
-            "id": inputFilter.id,
-            "customfield_10132":`${inputFilter.lat},${inputFilter.long}`
-          }
-    };
+  
 
-
-    console.log(theComment);
+    console.log('in add location', inputFilter);
 
     var options = {
-        method: 'POST',
-        url: 'https://otm-zenith.atlassian.net/rest/api/3/issue/' + inputFilter.key + '/transitions',
+        method: 'PUT',
+        url: 'https://otm-zenith.atlassian.net/rest/api/3/issue/' + inputFilter.key,
         headers:
         {
             Authorization: 'Basic ZnJhbmsudmFuZGFtbWVAb3RtZ3JvdXAuYmU6TUxDaW83Z0Q1bTk3NkxtbXRUSllCNDE1',
             //Authorization: 'Basic ZnJhbmtAb3RtLmJlOkJrUGs2ZWYxYm84SFdBZ2JVOUQ3QTkyQg==',
             'Content-Type': 'application/json'
         },
-        body: theComment,
+        body: inputFilter.body,
         json: true
     };
 
@@ -124,7 +86,7 @@ async function addLocation(event){
 
         request(options, function (error, res, body) {
             //console.log(res.statusCode);
-            if (!error && res.statusCode == 201) {
+            if (!error && res.statusCode == 204) {
                
 
                 resolve(body);
@@ -136,7 +98,6 @@ async function addLocation(event){
     });
 
 }
-
 async function getDetails(key) {
 
 
