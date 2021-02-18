@@ -8,7 +8,7 @@ var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({
 
 module.exports.createuser = async event => {
   console.log("create user");
-
+//nothing
   try {
     switch(event.resource){
       case '/list/users':
