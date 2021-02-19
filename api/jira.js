@@ -520,7 +520,9 @@ async function filter(who, cutomFilter) {
     if (cutomFilter.field5) {
         myQuery += ' and cf[10182] = \'' + cutomFilter.field5 + '\'';
     }
-   
+   if (cutomFilter.issueType) {
+        myQuery += ' and issuetype != \'' + cutomFilter.issueType + '\'';
+    }
 
 
     // 'Job type'
@@ -589,7 +591,8 @@ async function filter(who, cutomFilter) {
                             "crf3":"{{this.fields.customfield_10180}}",
                             "crf4":"{{this.fields.customfield_10181}}",
                             "crf5":"{{this.fields.customfield_10182}}",
-                            "platenumber":"{{this.fields.customfield_10058}}"
+                            "platenumber":"{{this.fields.customfield_10058}}",
+                            "issueType":"{{this.fields.issueType}}
                         }
                        
                     }
